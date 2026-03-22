@@ -35,7 +35,7 @@ async function fetchNews() {
             newsBox.innerHTML += `<div class="news-item"><a href="${item.link}" target="_blank">${item.title}</a></div>`;
         });
     } catch (e) {
-        newsBox.innerHTML = "<p>Լուրերը ժամանակավոր հասանելի չեն:</p>";
+        newsBox.innerHTML = "<div class='news-item'>Լուրերը ժամանակավոր հասանելի չեն:</div>";
     }
 }
 
