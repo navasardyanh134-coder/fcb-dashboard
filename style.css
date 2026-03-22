@@ -2,7 +2,7 @@
     --barca-red: #a50044;
     --barca-blue: #004d98;
     --barca-gold: #edbb00;
-    --card-bg: rgba(255, 255, 255, 0.08);
+    --card-bg: rgba(255, 255, 255, 0.07);
 }
 
 body {
@@ -16,54 +16,49 @@ header {
     background: linear-gradient(135deg, var(--barca-blue), var(--barca-red));
     padding: 25px;
     text-align: center;
-    border-bottom: 4px solid var(--barca-gold);
+    border-bottom: 3px solid var(--barca-gold);
 }
 
-.fcb-logo { width: 85px; transition: 0.6s ease; }
-.fcb-logo:hover { transform: scale(1.2) rotate(360deg); }
+.fcb-logo { width: 70px; transition: 0.4s; }
+.fcb-logo:hover { transform: scale(1.1) rotate(10deg); }
 
 .dashboard-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
-    padding: 50px 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 30px;
     max-width: 1200px;
     margin: auto;
 }
 
 .card {
     background: var(--card-bg);
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(12px);
     border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 25px;
-    padding: 25px;
-    transition: 0.4s ease;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: 0.3s;
 }
 
-.card:hover { transform: translateY(-10px); border-color: var(--barca-gold); }
+.card:hover { transform: translateY(-5px); border-color: var(--barca-gold); }
+
+h2 { color: var(--barca-gold); font-size: 1.2rem; border-left: 4px solid var(--barca-red); padding-left: 10px; }
 
 .news-item, .match-item {
     background: rgba(255,255,255,0.05);
-    margin: 15px 0;
-    padding: 15px;
-    border-radius: 12px;
-    border-left: 4px solid var(--barca-blue);
-    transition: 0.3s all ease;
+    margin: 10px 0; padding: 10px; border-radius: 10px;
 }
 
-.news-item:hover, .match-item:hover {
-    background: rgba(255,255,255,0.15);
-    transform: translateX(10px);
-    border-left: 4px solid var(--barca-gold);
-}
-
-.chart-container { height: 260px; }
 .contact-btn {
     display: inline-block;
     background: #0088cc;
     color: white;
-    padding: 10px 25px;
+    padding: 10px 20px;
     border-radius: 30px;
     text-decoration: none;
+    font-weight: bold;
     margin-top: 10px;
 }
+
+.chart-container { height: 250px; }
