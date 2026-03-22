@@ -3,41 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FCB Stats Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    
+    <title>FCB Stats Dashboard | Hayk Navasardyan</title>
+    <meta name="description" content="FC Barcelona Dashboard created by Hayk Navasardyan. Get latest scores, news and player stats.">
+    <meta name="keywords" content="FC Barcelona, Barca, Hayk Navasardyan, Football Dashboard, Lamine Yamal, Lewandowski, Բարսելոնա, Հայկ Նավասարդյան">
+    <meta name="author" content="Hayk Navasardyan">
+
+    <meta property="og:title" content="FCB Dashboard by Hayk Navasardyan">
+    <meta property="og:description" content="Live Barcelona stats and news dashboard. Built by Hayk.">
+    <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/en/thumb/4/47/FC_Barcelona_%28crest%29.svg/1200px-FC_Barcelona_%28crest%29.svg.png">
+    <meta property="og:url" content="https://navasardyanh134-coder.github.io/fcb-dashboard/">
+
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-    <div class="header-container">
-        <a href="https://www.fcbarcelona.com" target="_blank" class="logo-link">
-            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/47/FC_Barcelona_%28crest%29.svg/1200px-FC_Barcelona_%28crest%29.svg.png" alt="FCB Logo" class="fcb-logo">
-        </a>
-        <h1 class="main-title">FCB Stats Dashboard</h1>
-    </div>
+    <header>
+        <div class="logo-container">
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/47/FC_Barcelona_%28crest%29.svg/200px-FC_Barcelona_%28crest%29.svg.png" alt="FCB Logo" class="fcb-logo">
+            <h1>FCB DASHBOARD</h1>
+        </div>
+    </header>
 
-    <div class="container">
-        <div class="card chart-box">
-            <h3>Լավագույն ռմբարկուներ</h3>
+    <main class="dashboard-container">
+        <section class="card chart-card">
+            <h2>Լավագույն ռմբարկուներ</h2>
             <div class="chart-container">
                 <canvas id="playersChart"></canvas>
             </div>
-        </div>
+        </section>
 
-        <div class="card schedule-box">
-            <h3>Հաջորդ հանդիպումները</h3>
+        <section class="card matches-card">
+            <h2>Հաջորդ հանդիպումները</h2>
             <ul id="games-list">
-                <li>Բեռնվում է...</li>
+                <p>Բեռնվում է...</p>
             </ul>
-        </div>
+        </section>
 
-        <div class="card news-box">
-            <h3>Թարմ Լուրեր</h3>
+        <section class="card news-card">
+            <h2>Թարմ Լուրեր (Google News)</h2>
             <div id="news-list">
-                </div>
-        </div>
-    </div>
+                <p>Բեռնվում է...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Պատրաստեց <strong>Հայկ Նավասարդյանը</strong> | FC Barcelona Fan Site</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
