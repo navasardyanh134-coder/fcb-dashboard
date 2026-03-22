@@ -1,116 +1,64 @@
-/* Հիմնական կարգավորումներ */
 :root {
     --barca-red: #a50044;
     --barca-blue: #004d98;
     --barca-gold: #edbb00;
-    --dark-bg: #0a0a0a;
-    --card-bg: rgba(255, 255, 255, 0.05);
+    --card-bg: rgba(255, 255, 255, 0.07);
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--dark-bg);
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle, #1a1a1a 0%, #050505 100%);
     color: white;
     margin: 0;
-    padding: 0;
-    line-height: 1.6;
 }
 
-/* Header-ի դիզայնը */
 header {
     background: linear-gradient(135deg, var(--barca-blue), var(--barca-red));
-    padding: 20px 0;
+    padding: 25px;
     text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
     border-bottom: 3px solid var(--barca-gold);
 }
 
-.fcb-logo {
-    width: 80px;
-    filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
-    transition: transform 0.3s ease;
-}
+.fcb-logo { width: 70px; transition: 0.4s; }
+.fcb-logo:hover { transform: scale(1.1) rotate(10deg); }
 
-.fcb-logo:hover {
-    transform: scale(1.1) rotate(5deg);
-}
-
-h1 {
-    margin: 10px 0 0;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-}
-
-/* Dashboard-ի ցանցը (Grid) */
 .dashboard-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-    padding: 40px 20px;
+    gap: 20px;
+    padding: 30px;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: auto;
 }
 
-/* Քարտերի դիզայնը (Glassmorphism) */
 .card {
     background: var(--card-bg);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
     padding: 20px;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: 0.3s;
 }
 
-.card:hover {
-    transform: translateY(-10px);
-    border-color: var(--barca-gold);
-    box-shadow: 0 12px 40px 0 rgba(237, 187, 0, 0.2);
-}
+.card:hover { transform: translateY(-5px); border-color: var(--barca-gold); }
 
-h2 {
-    color: var(--barca-gold);
-    border-bottom: 2px solid var(--barca-red);
-    padding-bottom: 10px;
-    margin-top: 0;
-}
-
-/* Լուրերի և խաղերի ցուցակները */
-#news-list, #games-list {
-    list-style: none;
-    padding: 0;
-}
+h2 { color: var(--barca-gold); font-size: 1.2rem; border-left: 4px solid var(--barca-red); padding-left: 10px; }
 
 .news-item, .match-item {
-    background: rgba(255,255,255,0.03);
-    margin: 10px 0;
-    padding: 12px;
-    border-radius: 8px;
-    border-left: 4px solid var(--barca-blue);
-    transition: background 0.2s;
+    background: rgba(255,255,255,0.05);
+    margin: 10px 0; padding: 10px; border-radius: 10px;
 }
 
-.news-item:hover {
-    background: rgba(255,255,255,0.1);
-}
-
-a {
-    color: #4da3ff;
+.contact-btn {
+    display: inline-block;
+    background: #0088cc;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 30px;
-    font-size: 0.9rem;
-    color: #888;
-}
-
-/* Գրաֆիկի կոնտեյները */
-.chart-container {
-    position: relative;
-    height: 250px;
-    width: 100%;
-}
+.chart-container { height: 250px; }
