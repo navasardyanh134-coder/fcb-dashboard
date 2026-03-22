@@ -1,7 +1,6 @@
-// 1. Գրաֆիկի ստեղծում (Lewandowski, Raphinha, Yamal, Olmo)
+// 1. Գրաֆիկի ստեղծում
 function initChart() {
     const ctx = document.getElementById('playersChart').getContext('2d');
-    // Եթե նախկինում գրաֆիկ կար, ջնջում ենք, որ նորը սիրուն նստի
     if (window.myChart) {
         window.myChart.destroy();
     }
@@ -33,45 +32,26 @@ function initChart() {
     });
 }
 
-// 2. Լուրերի բեռնում (Ավելի կայուն տարբերակ)
-async function fetchNews() {
+// 2. Լուրերի բաժին (Հաստատուն և ապահով տարբերակ)
+function displayNews() {
     const newsBox = document.getElementById('news-list');
-    const rssUrl = "https://www.espn.com/soccer/rss/team/_/id/83/fc-barcelona";
-    // Օգտագործում ենք AllOrigins որպես միջնորդ (Proxy), որ 422 սխալ չտա
-    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(rssUrl)}`;
+    
+    // Սրանք թարմ և միշտ աշխատող հղումներ են
+    const officialNews = [
+        { title: "Barca Official News Hub", link: "https://www.fcbarcelona.com/en/news" },
+        { title: "ESPN: Barcelona Latest Updates", link: "https://www.espn.com/soccer/team/_/id/83/fc-barcelona" },
+        { title: "Transfer News & Rumors", link: "https://www.sport.es/en/" },
+        { title: "Lamine Yamal: The Future of Barca", link: "https://www.mundodeportivo.com/futbol/fc-barcelona" }
+    ];
 
-    try {
-        const response = await fetch(proxyUrl);
-        if (!response.ok) throw new Error("Network issues");
-        
-        const data = await response.json();
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(data.contents, "text/xml");
-        const items = xml.querySelectorAll("item");
-
-        if (items.length > 0) {
-            newsBox.innerHTML = "";
-            items.forEach((item, index) => {
-                if (index < 4) {
-                    const title = item.querySelector("title").textContent;
-                    const link = item.querySelector("link").textContent;
-                    newsBox.innerHTML += `
-                        <div class="news-item">
-                            <a href="${link}" target="_blank">${title}</a>
-                        </div>`;
-                }
-            });
-        } else {
-            throw new Error("No items found");
-        }
-    } catch (e) {
-        // Սա մեր "Plan B"-ն է. եթե API-ն չաշխատի, սրանք միանգամից կհայտնվեն
-        newsBox.innerHTML = `
-            <div class="news-item"><a href="https://www.fcbarcelona.com/en/news" target="_blank">Barca Official News Hub</a></div>
-            <div class="news-item"><a href="https://www.espn.com/soccer/team/_/id/83/fc-barcelona" target="_blank">ESPN Barcelona Updates</a></div>
-            <div class="news-item"><a href="https://www.sport.es/en/" target="_blank">Sport.es: Latest Barca News</a></div>
-        `;
-    }
+    newsBox.innerHTML = ""; // Մաքրում ենք "Բեռնվում է"-ն
+    
+    officialNews.forEach(item => {
+        newsBox.innerHTML += `
+            <div class="news-item">
+                <a href="${item.link}" target="_blank">${item.title}</a>
+            </div>`;
+    });
 }
 
 // 3. Խաղերի ցուցակ
@@ -92,9 +72,9 @@ function fetchMatches() {
     });
 }
 
-// Ամեն ինչ բեռնվում է էջը բացելիս
+// Այս ֆունկցիաները կաշխատեն էջը բացելիս
 window.onload = () => {
     initChart();
-    fetchNews();
+    displayNews(); // Այստեղ արդեն API չկա, իսկույն կբացվի
     fetchMatches();
 };
