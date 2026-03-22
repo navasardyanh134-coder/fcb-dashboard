@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCB Stats Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header-container">
+        <a href="https://www.fcbarcelona.com" target="_blank" class="logo-link">
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/47/FC_Barcelona_%28crest%29.svg/1200px-FC_Barcelona_%28crest%29.svg.png" alt="FCB Logo" class="fcb-logo">
+        </a>
+        <h1 class="main-title">FCB Dashboard</h1>
+    </div>
+
+    <div class="container">
+        <div class="card chart-box">
+            <h3>Լավագույն ռմբարկուներ</h3>
+            <div class="chart-container"><canvas id="playersChart"></canvas></div>
+        </div>
+
+        <div class="card schedule-box">
+            <h3>Հաջորդ հանդիպումները</h3>
+            <ul id="games-list"><li>Բեռնվում է...</li></ul>
+        </div>
+
+        <div class="card news-box">
+            <h3>Թարմ Լուրեր (Google News)</h3>
+            <div id="news-list"><p>Բեռնվում է...</p></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
