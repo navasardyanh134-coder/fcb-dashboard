@@ -11,28 +11,35 @@
 <body>
 
     <header>
-        <img src="https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_(logo).svg" alt="FCB Logo" width="80">
+        <img id="fcb-logo" src="https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_(logo).svg" alt="FC Barcelona Logo" width="80">
         <h1>FCB DASHBOARD</h1>
     </header>
 
     <main class="dashboard-container">
-        <section class="card">
+        <section class="card scorers-card">
             <h3>Լավագույն ռմբարկուներ</h3>
             <div class="chart-container">
                 <canvas id="scorersChart"></canvas>
             </div>
         </section>
 
-        <section class="card">
+        <section class="card matches-card">
             <h3>Հաջորդ հանդիպումները</h3>
             <div id="matches-list">
                 <p class="loading">Բեռնվում է...</p>
             </div>
         </section>
 
-        <section class="card">
-            <h3>Թարմ Լուրեր (ESPN)</h3>
+        <section class="card news-card">
+            <h3>Թարմ Լուրեր</h3>
             <div id="news-list">
+                <p class="loading">Բեռնվում է...</p>
+            </div>
+        </section>
+        
+        <section class="card standings-card">
+            <h3>Լա Լիգայի վարկանիշ</h3>
+            <div id="standings-list">
                 <p class="loading">Բեռնվում է...</p>
             </div>
         </section>
