@@ -1,64 +1,149 @@
 :root {
-    --barca-red: #a50044;
-    --barca-blue: #004d98;
-    --barca-gold: #edbb00;
-    --card-bg: rgba(255, 255, 255, 0.07);
+    --primary-red: #A50044;
+    --primary-blue: #004D98;
+    --primary-gold: #EDBB00;
+    --dark-bg: #121212;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    --transition: all 0.3s ease-in-out;
 }
 
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background: radial-gradient(circle, #1a1a1a 0%, #050505 100%);
-    color: white;
+    background-color: var(--dark-bg);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 header {
-    background: linear-gradient(135deg, var(--barca-blue), var(--barca-red));
-    padding: 25px;
     text-align: center;
-    border-bottom: 3px solid var(--barca-gold);
+    padding: 20px;
+    background: linear-gradient(135deg, var(--primary-red), var(--primary-blue));
+    width: 100%;
+    border-bottom: 2px solid var(--primary-gold);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
 }
 
-.fcb-logo { width: 70px; transition: 0.4s; }
-.fcb-logo:hover { transform: scale(1.1) rotate(10deg); }
+#fcb-logo {
+    animation: fadeInDown 1s ease-in-out;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin: 10px 0 0;
+    letter-spacing: 2px;
+}
 
 .dashboard-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-    padding: 30px;
+    width: 90%;
     max-width: 1200px;
-    margin: auto;
 }
 
 .card {
     background: var(--card-bg);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 20px;
+    border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    transition: 0.3s;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    overflow: hidden;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
 }
 
-.card:hover { transform: translateY(-5px); border-color: var(--barca-gold); }
+.card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 30px rgba(var(--primary-gold-rgb), 0.3);
+}
 
-h2 { color: var(--barca-gold); font-size: 1.2rem; border-left: 4px solid var(--barca-red); padding-left: 10px; }
+.card:nth-child(even) {
+    animation: fadeInUp 0.6s ease-in-out;
+}
 
-.news-item, .match-item {
+.card:nth-child(odd) {
+    animation: fadeInUp 0.8s ease-in-out;
+}
+
+h3 {
+    border-bottom: 2px solid var(--primary-gold);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #888;
+    height: 100px;
+    animation: pulse 1.5s infinite;
+}
+
+#matches-list, #standings-list, #news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.match-item, .standing-item, .news-item {
     background: rgba(255,255,255,0.05);
-    margin: 10px 0; padding: 10px; border-radius: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-gold);
+    transition: var(--transition);
 }
 
-.contact-btn {
-    display: inline-block;
-    background: #0088cc;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 30px;
+.match-item:hover, .standing-item:hover, .news-item:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.news-item a {
+    color: var(--primary-gold);
     text-decoration: none;
-    font-weight: bold;
-    margin-top: 10px;
+    font-size: 0.95rem;
+    display: block;
 }
 
-.chart-container { height: 250px; }
+.news-item p {
+    color: #ccc;
+    font-size: 0.85rem;
+    margin: 5px 0 0;
+}
+
+.standing-item {
+    display: grid;
+    grid-template-columns: 30px 1fr 40px;
+    align-items: center;
+}
+
+.chart-container {
+    animation: fadeInScale 1s ease-in-out;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
