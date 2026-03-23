@@ -2,15 +2,17 @@
 const API_KEY = '04027f5aafff460487955488cc988dd7';
 const TEAM_ID = 81; // FC Barcelona
 const RSS_URL = 'https://www.espn.com/soccer/rss/team/_/id/83/barcelona';
-const PROXY = 'https://api.allorigins.win/raw?url=';
+const PROXY = 'https://api.allorigins.win/raw?url='; // CORS սխալը շրջանցելու համար
 
+// 2. Ֆունկցիան աշխատում է էջը բեռնվելուն պես
 document.addEventListener('DOMContentLoaded', () => {
     initScorersChart();
     fetchMatches();
     fetchNews();
+    fetchStandings();
 });
 
-// 2. Լավագույն ռմբարկուների գրաֆիկ
+// 3. Լավագույն ռմբարկուների գրաֆիկ
 function initScorersChart() {
     const canvas = document.getElementById('scorersChart');
     if (!canvas) return;
@@ -48,7 +50,7 @@ function initScorersChart() {
     });
 }
 
-// 3. Հաջորդ հանդիպումների ստացում (CORS Proxy-ով)
+// 4. Հաջորդ հանդիպումների ստացում (CORS Proxy-ով)
 async function fetchMatches() {
     const container = document.getElementById('matches-list');
     if (!container) return;
@@ -76,7 +78,7 @@ async function fetchMatches() {
                 month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
             });
             container.innerHTML += `
-                <div style="background: rgba(255,255,255,0.05); margin: 10px 0; padding: 12px; border-radius: 8px; border-left: 4px solid #EDBB00;">
+                <div class="match-item">
                     <p style="margin:0; font-weight:bold; color:#fff;">${match.homeTeam.shortName} vs ${match.awayTeam.shortName}</p>
                     <small style="color: #bbb;">${date}</small>
                 </div>`;
@@ -86,12 +88,13 @@ async function fetchMatches() {
     }
 }
 
-// 4. Թարմ լուրերի ստացում
+// 5. Թարմ լուրերի ստացում (Փոխարինված RSS-ը` NewsAPI-ով)
 async function fetchNews() {
     const newsContainer = document.getElementById('news-list');
     if (!newsContainer) return;
 
-    const newsApi = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
+    // RSS2JSON-ի 500 սխալի պատճառով օգտագործում ենք NewsAPI
+    const newsApi = `https://newsapi.org/v2/everything?q=fc barcelona&sortBy=publishedAt&apiKey=f65b4c1303cc44249a0e69818815f483`;
 
     try {
         const response = await fetch(newsApi);
@@ -99,12 +102,12 @@ async function fetchNews() {
 
         if (data.status === 'ok') {
             newsContainer.innerHTML = '';
-            data.items.slice(0, 3).forEach(item => {
+            data.articles.slice(0, 3).forEach(item => {
+                const date = new Date(item.publishedAt).toLocaleDateString('hy-AM');
                 newsContainer.innerHTML += `
-                    <div style="margin-bottom: 12px; border-bottom: 1px solid #333; padding-bottom: 8px;">
-                        <a href="${item.link}" target="_blank" style="color: #EDBB00; text-decoration: none; font-size: 0.95rem; display: block;">
-                            ${item.title}
-                        </a>
+                    <div class="news-item">
+                        <a href="${item.url}" target="_blank">${item.title}</a>
+                        <p>${date}</p>
                     </div>`;
             });
         } else {
@@ -112,5 +115,34 @@ async function fetchNews() {
         }
     } catch (error) {
         newsContainer.innerHTML = '<p style="color:#888;">Լուրերը ժամանակավոր հասանելի չեն:</p>';
+    }
+}
+
+// 6. Թիմի վարկանիշի ստացում
+async function fetchStandings() {
+    const standingsContainer = document.getElementById('standings-list');
+    if (!standingsContainer) return;
+
+    const apiUrl = `https://api.football-data.org/v4/competitions/PD/standings`;
+
+    try {
+        const response = await fetch(PROXY + encodeURIComponent(apiUrl), {
+            headers: { 'X-Auth-Token': API_KEY }
+        });
+
+        if (!response.ok) throw new Error('Standings error');
+        
+        const data = await response.json();
+        const standings = data.standings[0].table;
+        const barcaStandings = standings.find(s => s.team.id === TEAM_ID);
+
+        standingsContainer.innerHTML = `
+            <div class="standing-item">
+                <span style="color: var(--primary-gold); font-weight: bold;">${barcaStandings.position}</span>
+                <span>${barcaStandings.team.name}</span>
+                <span style="font-weight: bold;">${barcaStandings.points}</span>
+            </div>`;
+    } catch (error) {
+        standingsContainer.innerHTML = '<p style="color:#ff4d4d;">Վարկանիշը բեռնելիս սխալ տեղի ունեցավ:</p>';
     }
 }
