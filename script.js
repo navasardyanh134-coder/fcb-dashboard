@@ -1,148 +1,49 @@
-// 1. Կոնֆիգուրացիա
-const API_KEY = '04027f5aafff460487955488cc988dd7';
-const TEAM_ID = 81; // FC Barcelona
-const RSS_URL = 'https://www.espn.com/soccer/rss/team/_/id/83/barcelona';
-const PROXY = 'https://api.allorigins.win/raw?url='; // CORS սխալը շրջանցելու համար
-
-// 2. Ֆունկցիան աշխատում է էջը բեռնվելուն պես
 document.addEventListener('DOMContentLoaded', () => {
-    initScorersChart();
-    fetchMatches();
-    fetchNews();
-    fetchStandings();
-});
-
-// 3. Լավագույն ռմբարկուների գրաֆիկ
-function initScorersChart() {
-    const canvas = document.getElementById('scorersChart');
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Lewandowski', 'Raphinha', 'Lamine Yamal', 'Dani Olmo'],
-            datasets: [{
-                label: 'Գոլեր (25/26)',
-                data: [19, 12, 7, 6],
-                backgroundColor: ['#A50044', '#004D98', '#A50044', '#004D98'],
-                borderColor: '#EDBB00',
-                borderWidth: 2
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: { 
-                    beginAtZero: true, 
-                    ticks: { color: '#fff' },
-                    grid: { color: 'rgba(255,255,255,0.1)' }
-                },
-                x: { 
-                    ticks: { color: '#fff' },
-                    grid: { display: false }
-                }
-            },
-            plugins: {
-                legend: { labels: { color: '#fff' } }
-            }
-        }
-    });
-}
-
-// 4. Հաջորդ հանդիպումների ստացում (CORS Proxy-ով)
-async function fetchMatches() {
-    const container = document.getElementById('matches-list');
-    if (!container) return;
-
-    const apiUrl = `https://api.football-data.org/v4/teams/${TEAM_ID}/matches?status=SCHEDULED`;
     
-    try {
-        const response = await fetch(PROXY + encodeURIComponent(apiUrl), {
-            headers: { 'X-Auth-Token': API_KEY }
-        });
+    // 1. Ստեղծում ենք Խաղերի տվյալներ (Mock Data)
+    const matches = [
+        { home: "Barcelona", away: "Las Palmas", date: "Մարտ 30, 2024", competition: "La Liga" },
+        { home: "PSG", away: "Barcelona", date: "Ապրիլ 10, 2024", competition: "Champions League" },
+        { home: "Cadiz", away: "Barcelona", date: "Ապրիլ 13, 2024", competition: "La Liga" }
+    ];
 
-        if (!response.ok) throw new Error('API Error');
-        
-        const data = await response.json();
-        const matches = data.matches.slice(0, 2);
+    // 2. Ստեղծում ենք Լուրերի տվյալներ (Mock Data)
+    const news = [
+        { title: "Յամալը նոր ռեկորդ է սահմանում Լա Լիգայում:", date: "Այսօր", link: "#" },
+        { title: "Չեմպիոնների Լիգա. Բարսելոնան պատրաստվում է Փարիզյան ուղևորությանը:", date: "Երեկ", link: "#" },
+        { title: "Լևանդովսկին ճանաչվել է ամսվա լավագույն ֆուտբոլիստ:", date: "2 օր առաջ", link: "#" }
+    ];
 
-        if (matches.length === 0) {
-            container.innerHTML = '<p>Առաջիկա խաղեր չկան:</p>';
-            return;
+    // 3. Ֆունկցիա, որը նկարում է խաղերը էկրանին
+    const matchesContainer = document.getElementById('matches-container');
+    matches.forEach((match, index) => {
+        const matchElement = document.createElement('div');
+        matchElement.className = 'list-item';
+        // Փոխում ենք ձախ կողմի գիծը ՉԼ խաղերի համար
+        if(match.competition === "Champions League") {
+            matchElement.style.borderLeftColor = "#004D98"; 
         }
 
-        container.innerHTML = '';
-        matches.forEach(match => {
-            const date = new Date(match.utcDate).toLocaleString('hy-AM', {
-                month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
-            });
-            container.innerHTML += `
-                <div class="match-item">
-                    <p style="margin:0; font-weight:bold; color:#fff;">${match.homeTeam.shortName} vs ${match.awayTeam.shortName}</p>
-                    <small style="color: #bbb;">${date}</small>
-                </div>`;
-        });
-    } catch (error) {
-        container.innerHTML = '<p style="color:#ff4d4d;">Խաղերը բեռնելիս սխալ տեղի ունեցավ:</p>';
-    }
-}
+        matchElement.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <strong>${match.home} vs ${match.away}</strong>
+                <span style="font-size: 0.75rem; background: rgba(255,255,255,0.1); padding: 3px 8px; border-radius: 4px;">${match.competition}</span>
+            </div>
+            <span class="date-text">⏱ ${match.date}</span>
+        `;
+        matchesContainer.appendChild(matchElement);
+    });
 
-// 5. Թարմ լուրերի ստացում (Փոխարինված RSS-ը` NewsAPI-ով)
-async function fetchNews() {
-    const newsContainer = document.getElementById('news-list');
-    if (!newsContainer) return;
+    // 4. Ֆունկցիա, որը նկարում է լուրերը
+    const newsContainer = document.getElementById('news-container');
+    news.forEach(item => {
+        const newsElement = document.createElement('div');
+        newsElement.className = 'list-item';
+        newsElement.innerHTML = `
+            <a href="${item.link}" class="news-link">📰 ${item.title}</a>
+            <span class="date-text">${item.date}</span>
+        `;
+        newsContainer.appendChild(newsElement);
+    });
 
-    // RSS2JSON-ի 500 սխալի պատճառով օգտագործում ենք NewsAPI
-    const newsApi = `https://newsapi.org/v2/everything?q=fc barcelona&sortBy=publishedAt&apiKey=f65b4c1303cc44249a0e69818815f483`;
-
-    try {
-        const response = await fetch(newsApi);
-        const data = await response.json();
-
-        if (data.status === 'ok') {
-            newsContainer.innerHTML = '';
-            data.articles.slice(0, 3).forEach(item => {
-                const date = new Date(item.publishedAt).toLocaleDateString('hy-AM');
-                newsContainer.innerHTML += `
-                    <div class="news-item">
-                        <a href="${item.url}" target="_blank">${item.title}</a>
-                        <p>${date}</p>
-                    </div>`;
-            });
-        } else {
-            throw new Error('RSS error');
-        }
-    } catch (error) {
-        newsContainer.innerHTML = '<p style="color:#888;">Լուրերը ժամանակավոր հասանելի չեն:</p>';
-    }
-}
-
-// 6. Թիմի վարկանիշի ստացում
-async function fetchStandings() {
-    const standingsContainer = document.getElementById('standings-list');
-    if (!standingsContainer) return;
-
-    const apiUrl = `https://api.football-data.org/v4/competitions/PD/standings`;
-
-    try {
-        const response = await fetch(PROXY + encodeURIComponent(apiUrl), {
-            headers: { 'X-Auth-Token': API_KEY }
-        });
-
-        if (!response.ok) throw new Error('Standings error');
-        
-        const data = await response.json();
-        const standings = data.standings[0].table;
-        const barcaStandings = standings.find(s => s.team.id === TEAM_ID);
-
-        standingsContainer.innerHTML = `
-            <div class="standing-item">
-                <span style="color: var(--primary-gold); font-weight: bold;">${barcaStandings.position}</span>
-                <span>${barcaStandings.team.name}</span>
-                <span style="font-weight: bold;">${barcaStandings.points}</span>
-            </div>`;
-    } catch (error) {
-        standingsContainer.innerHTML = '<p style="color:#ff4d4d;">Վարկանիշը բեռնելիս սխալ տեղի ունեցավ:</p>';
-    }
-}
+});
