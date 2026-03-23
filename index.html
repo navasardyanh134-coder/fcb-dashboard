@@ -3,44 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FCB Stats Dashboard | Hayk Navasardyan</title>
-    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_(logo).svg">
+    <title>FC Barcelona | Premium Dashboard</title>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28logo%29.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-    <header>
-        <img id="fcb-logo" src="https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_(logo).svg" alt="FC Barcelona Logo" width="80">
-        <h1>FCB DASHBOARD</h1>
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28logo%29.svg" alt="Barca Logo" class="logo-img">
+            <h1>MÉS QUE UN CLUB</h1>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h2 class="glitch" data-text="VISCA EL BARÇA">VISCA EL BARÇA</h2>
+            <p>Պաշտոնական վիճակագրություն և նորություններ</p>
+        </div>
     </header>
 
-    <main class="dashboard-container">
-        <section class="card scorers-card">
-            <h3>Լավագույն ռմբարկուներ</h3>
-            <div class="chart-container">
-                <canvas id="scorersChart"></canvas>
+    <main class="dashboard">
+        <section class="glass-card fade-in">
+            <div class="card-header">
+                <h3>📅 Հաջորդ Հանդիպումները</h3>
             </div>
+            <div id="matches-container" class="card-body"></div>
         </section>
 
-        <section class="card matches-card">
-            <h3>Հաջորդ հանդիպումները</h3>
-            <div id="matches-list">
-                <p class="loading">Բեռնվում է...</p>
+        <section class="glass-card fade-in delay-1">
+            <div class="card-header">
+                <h3>📰 Թարմ Լուրեր</h3>
             </div>
+            <div id="news-container" class="card-body"></div>
         </section>
 
-        <section class="card news-card">
-            <h3>Թարմ Լուրեր</h3>
-            <div id="news-list">
-                <p class="loading">Բեռնվում է...</p>
+        <section class="glass-card premium-card fade-in delay-2">
+            <div class="card-header gold-text">
+                <h3>👑 Բոլոր Ժամանակների Լավագույնը</h3>
             </div>
-        </section>
-        
-        <section class="card standings-card">
-            <h3>Լա Լիգայի վարկանիշ</h3>
-            <div id="standings-list">
-                <p class="loading">Բեռնվում է...</p>
+            <div class="goat-section">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg" alt="Lionel Messi" class="goat-img">
+                <div class="goat-info">
+                    <h4>Լիոնել Մեսսի (D10S)</h4>
+                    <ul>
+                        <li><strong>Գոլեր Բարսայում:</strong> 672</li>
+                        <li><strong>Ոսկե Գնդակ:</strong> 8</li>
+                        <li><strong>Կարգավիճակ:</strong> Ֆուտբոլի Աստված</li>
+                    </ul>
+                </div>
             </div>
         </section>
     </main>
