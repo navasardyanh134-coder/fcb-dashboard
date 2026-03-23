@@ -1,149 +1,202 @@
 :root {
-    --primary-red: #A50044;
-    --primary-blue: #004D98;
-    --primary-gold: #EDBB00;
-    --dark-bg: #121212;
-    --card-bg: rgba(255, 255, 255, 0.05);
-    --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    --transition: all 0.3s ease-in-out;
+    --bg-color: #050510;
+    --barca-red: #A50044;
+    --barca-blue: #004D98;
+    --barca-gold: #EDBB00;
+    --glass-bg: rgba(20, 20, 40, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
 }
 
 body {
-    background-color: var(--dark-bg);
-    color: #fff;
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
+    background-color: var(--bg-color);
+    color: white;
+    background-image: radial-gradient(circle at 15% 50%, rgba(165, 0, 68, 0.15), transparent 25%),
+                      radial-gradient(circle at 85% 30%, rgba(0, 77, 152, 0.15), transparent 25%);
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+
+/* Navbar */
+.navbar {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 15px 50px;
+    border-bottom: 2px solid var(--barca-gold);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-container {
     display: flex;
-    flex-direction: column;
     align-items: center;
-}
-
-header {
-    text-align: center;
-    padding: 20px;
-    background: linear-gradient(135deg, var(--primary-red), var(--primary-blue));
-    width: 100%;
-    border-bottom: 2px solid var(--primary-gold);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-bottom: 30px;
-}
-
-#fcb-logo {
-    animation: fadeInDown 1s ease-in-out;
-}
-
-h1 {
-    font-size: 2.5rem;
-    margin: 10px 0 0;
-    letter-spacing: 2px;
-}
-
-.dashboard-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    width: 90%;
-    max-width: 1200px;
-}
-
-.card {
-    background: var(--card-bg);
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: var(--card-shadow);
-    transition: var(--transition);
-    overflow: hidden;
-    cursor: pointer;
-    backdrop-filter: blur(5px);
-}
-
-.card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 8px 30px rgba(var(--primary-gold-rgb), 0.3);
-}
-
-.card:nth-child(even) {
-    animation: fadeInUp 0.6s ease-in-out;
-}
-
-.card:nth-child(odd) {
-    animation: fadeInUp 0.8s ease-in-out;
-}
-
-h3 {
-    border-bottom: 2px solid var(--primary-gold);
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
-
-.loading {
-    display: flex;
+    gap: 15px;
     justify-content: center;
-    align-items: center;
-    color: #888;
-    height: 100px;
-    animation: pulse 1.5s infinite;
 }
 
-#matches-list, #standings-list, #news-list {
+.logo-img {
+    width: 50px;
+    animation: pulse 2s infinite;
+}
+
+.logo-container h1 {
+    font-weight: 800;
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, var(--barca-red), var(--barca-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Hero Section */
+.hero {
+    height: 30vh;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    margin-bottom: 40px;
 }
 
-.match-item, .standing-item, .news-item {
-    background: rgba(255,255,255,0.05);
-    padding: 12px;
+.hero h2 {
+    font-size: 3rem;
+    color: white;
+    text-shadow: 0 0 20px rgba(237, 187, 0, 0.5);
+    margin-bottom: 10px;
+}
+
+/* Dashboard Grid */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    padding: 0 5%;
+    max-width: 1400px;
+    margin: 0 auto 50px auto;
+}
+
+/* Glass Cards */
+.glass-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 25px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 77, 152, 0.4);
+    border-color: var(--barca-gold);
+}
+
+.premium-card:hover {
+    box-shadow: 0 15px 40px rgba(237, 187, 0, 0.3);
+}
+
+.card-header h3 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.gold-text h3 {
+    color: var(--barca-gold);
+}
+
+/* Items inside cards */
+.list-item {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 15px;
     border-radius: 8px;
-    border-left: 4px solid var(--primary-gold);
-    transition: var(--transition);
+    margin-bottom: 15px;
+    border-left: 4px solid var(--barca-red);
+    transition: all 0.3s ease;
 }
 
-.match-item:hover, .standing-item:hover, .news-item:hover {
-    background: rgba(255,255,255,0.1);
+.list-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(5px);
 }
 
-.news-item a {
-    color: var(--primary-gold);
+.news-link {
+    color: #fff;
     text-decoration: none;
-    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.news-link:hover {
+    color: var(--barca-gold);
+}
+
+.date-text {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 5px;
     display: block;
 }
 
-.news-item p {
-    color: #ccc;
-    font-size: 0.85rem;
-    margin: 5px 0 0;
-}
-
-.standing-item {
-    display: grid;
-    grid-template-columns: 30px 1fr 40px;
+/* GOAT Section */
+.goat-section {
+    display: flex;
+    gap: 20px;
     align-items: center;
 }
 
-.chart-container {
-    animation: fadeInScale 1s ease-in-out;
+.goat-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--barca-gold);
+    box-shadow: 0 0 20px rgba(237, 187, 0, 0.4);
 }
 
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+.goat-info h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
 }
+
+.goat-info ul {
+    list-style: none;
+    font-size: 0.9rem;
+    color: #ccc;
+    line-height: 1.6;
+}
+
+.goat-info strong {
+    color: var(--barca-gold);
+}
+
+/* Animations */
+.fade-in {
+    animation: fadeInUp 1s ease forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
 
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInScale {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes pulse {
-    0% { opacity: 0.5; }
-    50% { opacity: 1; }
-    100% { opacity: 0.5; }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
