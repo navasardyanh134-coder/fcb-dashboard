@@ -1,60 +1,55 @@
 <!DOCTYPE html>
-<html lang="hy">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FC Barcelona | Premium Dashboard</title>
-    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28logo%29.svg">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Barça Ultimate Dashboard</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
-    <nav class="navbar">
-        <div class="logo-container">
-            <img src="https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28logo%29.svg" alt="Barca Logo" class="logo-img">
-            <h1>MÉS QUE UN CLUB</h1>
+    <div class="sidebar">
+        <div class="logo-area" onclick="location.reload()" style="cursor: pointer;">
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/47/FC_Barcelona_%28crest%29.svg/250px-FC_Barcelona_%28crest%29.svg.png" class="barca-logo">
+            <h2>BARÇA HUB</h2>
         </div>
-    </nav>
-
-    <header class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h2 class="glitch" data-text="VISCA EL BARÇA">VISCA EL BARÇA</h2>
-            <p>Պաշտոնական վիճակագրություն և նորություններ</p>
+        <nav>
+            <button class="nav-btn active-btn" onclick="showSection('fixtures')"><i class="fas fa-calendar-alt"></i> Matches</button>
+            <button class="nav-btn" onclick="showSection('table')"><i class="fas fa-table"></i> La Liga</button>
+            <button class="nav-btn" onclick="showSection('scorers')"><i class="fas fa-running"></i> Scorers</button>
+            <button class="nav-btn" onclick="showSection('news')"><i class="fas fa-newspaper"></i> News</button>
+        </nav>
+        
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch">
+                <input type="checkbox" id="checkbox" onchange="toggleTheme()">
+                <div class="slider round"></div>
+            </label>
+            <span id="theme-text">Dark Mode</span>
         </div>
-    </header>
+    </div>
 
-    <main class="dashboard">
-        <section class="glass-card fade-in">
-            <div class="card-header">
-                <h3>📅 Հաջորդ Հանդիպումները</h3>
-            </div>
-            <div id="matches-container" class="card-body"></div>
+    <main class="content">
+        <section id="fixtures" class="tab-content active">
+            <h1 class="section-title">Upcoming Matches</h1>
+            <div id="fixtures-container"></div>
         </section>
 
-        <section class="glass-card fade-in delay-1">
-            <div class="card-header">
-                <h3>📰 Թարմ Լուրեր</h3>
+        <section id="table" class="tab-content">
+            <h1 class="section-title">La Liga Standings</h1>
+            <div class="card table-card">
+                <div id="table-container"></div>
             </div>
-            <div id="news-container" class="card-body"></div>
         </section>
 
-        <section class="glass-card premium-card fade-in delay-2">
-            <div class="card-header gold-text">
-                <h3>👑 Բոլոր Ժամանակների Լավագույնը</h3>
-            </div>
-            <div class="goat-section">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg" alt="Lionel Messi" class="goat-img">
-                <div class="goat-info">
-                    <h4>Լիոնել Մեսսի (D10S)</h4>
-                    <ul>
-                        <li><strong>Գոլեր Բարսայում:</strong> 672</li>
-                        <li><strong>Ոսկե Գնդակ:</strong> 8</li>
-                        <li><strong>Կարգավիճակ:</strong> Ֆուտբոլի Աստված</li>
-                    </ul>
-                </div>
-            </div>
+        <section id="scorers" class="tab-content">
+            <h1 class="section-title">Top Scorers</h1>
+            <div id="scorers-container" class="scorers-grid"></div>
+        </section>
+
+        <section id="news" class="tab-content">
+            <h1 class="section-title">Latest News</h1>
+            <div id="news-container"></div>
         </section>
     </main>
 
